@@ -1,0 +1,24 @@
+== LinWin Bootmaker
+
+This script takes a destination USB disk device, a Windows installation DVD, and runs through all the steps to automatically format, partition, and copy the files over.
+
+It has been tested with:
+
+* Windows 7 Ultimate Retail DVD
+* Windows 10 Dell OEM DVD
+
+It should work with any discs Windows 7 and beyond, but your mileage may vary; pull requests welcome.
+
+TIP: This script requires root priviledges to write to, and mount disks.
+
+WARNING: This script can, will, and does wipe the disk specified. There are pre-flight checks and notices, but please verify the destination disk before proceeding.
+
+=== Requirements
+
+This script requires `ms-sys` to be installed on the machine. By default, it checks `/usr/local/bin/ms-sys`, and failing that, uses `command` to try and find it.
+You can download and build `ms-sys` at: http://ms-sys.sourceforge.net/
+
+This script also uses `parted` for disk partitioning.
+
+=== Disclaimer
+This software is not endorsed or affiliated with Microsoft® or Microsoft® Windows® in any way.
