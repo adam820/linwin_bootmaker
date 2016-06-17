@@ -112,7 +112,7 @@ fi
 
 echo -ne "\n"
 echo -e ">> Copying Windows installation contents to disk..."
-cp -a /media/* /mnt/
+cp -av /media/* /mnt/
 if [ $? -ne 0 ]; then
 	echo -e "\n[ ERROR ]: Issue copying files. Exiting."
 	exit 1
