@@ -110,12 +110,21 @@ else
 	exit 1
 fi
 
-echo -ne "\n"
-echo -e ">> Copying Windows installation contents to disk..."
-cp -av /media/* /mnt/
-if [ $? -ne 0 ]; then
-	echo -e "\n[ ERROR ]: Issue copying files. Exiting."
-	exit 1
+if [ -x "$(command -v rsync)" ]; then
+	echo -e ">> Copying files (Using rsync)..."
+	RSYNC=$(command -v rsync)
+	rsync -avP /media/ /mnt
+	if [ $? -ne 0 ]; then
+		echo -e "\n[ ERROR ]: Issue copying files. Exiting."
+		exit 1
+	fi
+else
+	echo -e ">> Copying files (using cp -- no rsync found)..."
+	cp -av /media/* /mnt/
+	if [ $? -ne 0 ]; then
+		echo -e "\n[ ERROR ]: Issue copying files. Exiting."
+		exit 1
+	fi
 fi
 
 # Clean up.
