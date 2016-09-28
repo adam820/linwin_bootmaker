@@ -84,13 +84,15 @@ mkfs.ntfs -f ${DISK}1
 
 # Use ms-sys to make bootloader.
 echo -ne "\n"
-echo -e ">> Writing Windows 7 boot loader..."
+echo -e ">> Writing Windows boot loaders..."
 $MSSYS -7 $DISK
+$MSSYS -n ${DISK}1
+
 
 # Mount and copy files to disk.
 echo -ne "\n"
 echo -e ">> Mounting disk to /mnt..."
-if ! [ $(ls -A /mnt) ]; then
+if ! [[ -n $(ls -A /mnt) ]]; then
 	mount ${DISK}1 /mnt
 else
 	echo -e "\n [ ERROR ]: /mnt not empty."
@@ -99,7 +101,7 @@ fi
 
 echo -ne "\n"
 echo -e ">> Mounting Windows 7 ISO to /media..."
-if ! [ $(ls -A /media) ]; then
+if ! [[ -n $(ls -A /media) ]]; then
 	mount -o loop $2 /media
 	if [ $? -ne 0 ]; then
 		echo -e "\n[ ERROR ]: Issue mounting ISO. Exiting."
